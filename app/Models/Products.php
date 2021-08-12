@@ -17,7 +17,22 @@ class Products extends Model
     protected $fillable = [
         'name',
         'created_at',
+        'updated_at',
         'quantity',
         'categories_id'
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y H:i:s',
+    ];
+
+    public function categoryid()
+    {
+        return $this->belongsTo(Categories::class, 'categories_id');
+    }
 }
