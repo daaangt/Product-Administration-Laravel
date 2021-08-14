@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+//Route::middleware('auth')->group(function () {
+    Route::get('cadastrar-produtos', [CategoriesController::class, 'products'])->name('products');
+    Route::post('cadastrar-produtos/create', [CategoriesController::class, 'productStore'])->name('products.create');
+    Route::put('cadastrar-produtos/{product}', [CategoriesController::class, 'productUpdate'])->name('products.edit');
+    Route::delete('cadastrar-produtos/{product}', [CategoriesController::class, 'productDestroy'])->name('products.delete');
 
-Route::get('cadastrar-produtos', [CategoriesController::class, 'products'])->name('products');
-Route::post('cadastrar-produtos/create', [CategoriesController::class, 'productStore'])->name('products.create');
-Route::post('cadastrar-produtos/delete/{product}', [CategoriesController::class, 'productDestroy'])->name('products.delete');
-Route::post('cadastrar-produtos/edit/{product}', [CategoriesController::class, 'productUpdate'])->name('products.edit');
+    Route::get('cadastrar-categorias', [CategoriesController::class, 'categories'])->name('categories');
+    Route::post('cadastrar-categorias/create', [CategoriesController::class, 'categoryStore'])->name('categories.create');
+    Route::put('cadastrar-categorias/{category}', [CategoriesController::class, 'categoryUpdate'])->name('categories.edit');
+    Route::delete('cadastrar-categorias/{category}', [CategoriesController::class, 'categoryDestroy'])->name('categories.delete');
 
-Route::get('cadastrar-categorias', [CategoriesController::class, 'categories'])->name('categories');
-Route::post('cadastrar-categorias/create', [CategoriesController::class, 'categoryStore'])->name('categories.create');
-Route::post('cadastrar-categorias/delete/{category}', [CategoriesController::class, 'categoryDestroy'])->name('categories.delete');
-Route::post('cadastrar-categorias/edit/{category}', [CategoriesController::class, 'categoryUpdate'])->name('categories.edit');
+    Route::get('/', [CategoriesController::class, 'products'])->withoutMiddleware('auth')->name('dashboard');
+//});
