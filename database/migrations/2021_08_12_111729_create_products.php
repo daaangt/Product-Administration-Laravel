@@ -16,12 +16,17 @@ class CreateProducts extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->nullable();
-            $table->integer('quantity')->nullable();
 
             $table->unsignedBigInteger('categories_id');
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
+
+            $table->integer('quantity')->nullable();
+            $table->decimal('price', 10, 2)->default(0.00);
+
+            $table->text('composition')->nullable();
+            $table->enum('size', ['PP', 'P', 'M', 'G', 'GG', 'EG', 'EGG'])->nullable();
+
+            $table->timestamps();
         });
     }
 

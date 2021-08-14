@@ -19,7 +19,10 @@ class Products extends Model
         'created_at',
         'updated_at',
         'quantity',
-        'categories_id'
+        'categories_id',
+        'price',
+        'composition',
+        'size'
     ];
 
     /**

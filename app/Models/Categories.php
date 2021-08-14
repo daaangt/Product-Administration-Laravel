@@ -16,6 +16,7 @@ class Categories extends Model
      */
     protected $fillable = [
         'name',
+        'file',
         'created_at'
     ];
 }
