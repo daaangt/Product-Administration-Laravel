@@ -3,51 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
-use App\Models\Products;
+
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
     /**
-     * Display a listing of the products and a form to additions.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function products()
-    {
-        $products = Products::all();
-        $categories = Categories::all();
-        return view('dashboard.products', compact('products', 'categories'));
-    }
-
-    /**
      * Display a listing of the categories and a form to additions.
      *
      * @return \Illuminate\Http\Response
      */
-    public function categories()
+    public function index()
     {
         $categories = Categories::all();
         return view('dashboard.categories', compact('categories'));
-    }
-
-    /**
-     * Store a newly created product resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function productStore(Request $request)
-    {
-        $validatedData = request()->validate([
-            'name' => 'required|min:3',
-            'categories_id' => 'required|integer',
-            'quantity' => 'required|integer'
-        ]);
-
-        Products::create($validatedData);
-
-        return redirect(route('products'));
     }
 
     /**
@@ -56,59 +25,22 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function categoryStore(Request $request)
+    public function store(Request $request)
     {
         $validatedData = request()->validate([
-            'name' => 'required|min:2'
+            'name' => 'required|min:2',
+            'file' => 'required|mimes:jpg'
         ]);
+
+        if ($request->hasFile('file')) {
+            if($request->file('file')->isValid()) {
+                $request->file('file')->move(public_path('categories\\'), $request->name . "." . $request->file('file')->getClientOriginalExtension());
+                $validatedData['file'] = 'categories\\' . $request->name . "." . $request->file('file')->getClientOriginalExtension();
+            }
+        }
 
         Categories::create($validatedData);
-
-        return redirect(route('categories'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Products  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function productDestroy(Products $product)
-    {
-        $product->delete();
-        return redirect(route('products'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Categories  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function categoryDestroy(Categories $category)
-    {
-        $category->delete();
-        return redirect(route('categories'));
-    }
-
-/**
-     * Update the specified product resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Products  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function productUpdate(Request $request, Products $product)
-    {
-        $validatedData = request()->validate([
-            'name' => 'required|min:3',
-            'categories_id' => 'required|integer',
-            'quantity' => 'required|integer'
-        ]);
-
-        $product->update($validatedData);
-
-        return redirect(route('products'));
+        return redirect()->back()->with('success', 'Registro criado com sucesso');
     }
 
     /**
@@ -118,14 +50,41 @@ class CategoriesController extends Controller
      * @param  \App\Categories  $category
      * @return \Illuminate\Http\Response
      */
-    public function categoryUpdate(Request $request, Categories $category)
-    { 
+    public function update(Request $request, Categories $category)
+    {
         $validatedData = request()->validate([
-            'name' => 'required|min:2'
+            'name' => 'required|min:2',
+            'file' => 'mimes:jpg'
         ]);
 
-        $category->update($validatedData);
+        if ($request->hasFile('file')) {
+            if($request->file('file')->isValid()) {
+                if (file_exists(asset($category->file))) {
+                    unlink(asset($category->file));
+                }
 
-        return redirect(route('categories'));
+                $request->file('file')->move(public_path('categories\\'), $request->name . "." . $request->file('file')->getClientOriginalExtension());
+                $validatedData['file'] = 'categories\\' . $request->name . "." . $request->file('file')->getClientOriginalExtension();
+            }
+        }
+
+        $category->update($validatedData);
+        return redirect()->back()->with('success', 'Registro alterado com sucesso');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Categories  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Categories $category)
+    {
+        if (file_exists(asset($category->file))) {
+            unlink(asset($category->file));
+        }
+
+        $category->delete();
+        return redirect()->back()->with('success', 'Registro deletado com sucesso');
     }
 }

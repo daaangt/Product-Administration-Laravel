@@ -2,9 +2,9 @@
 @section('main')
     @include('navbar')
     @include('partials')
-    <div class="col-md-12 d-flex justify-content-center py-5">
+    <div class="col-md-12 d-flex justify-content-center py-3">
         <div class="col-md-6">
-            <form class="form-floating" method="post" action="{{ route('categories.create') }}"
+            <form class="form-floating" method="post" action="{{ route('categories.store') }}"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="card shadow">
@@ -52,6 +52,7 @@
                                     style="background: none; padding: 0px; border: none;">
                                     <i class="bi bi-eye bi-2x" style="font-size: 25px;"></i>
                                 </button>
+
                                 <div class="modal fade" id="ModalLook{{ $category->id }}" tabindex="-1"
                                     aria-hidden="true">
                                     <div class="modal-dialog">
@@ -64,13 +65,14 @@
                                             </div>
                                             <div class="modal-body ">
                                                 <img width="90%;" class="rounded mx-auto d-block"
-                                                    src="{{ asset('categories/' . $category->name . '.jpg') }}">
+                                                    src="{{ asset($category->file) }}">
+                                                    {{ asset($category->file) }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            {{--  --}}
+
                             <td>{{ $category->created_at->format('d/m/Y') }} ás
                                 {{ $category->created_at->format('H:i:s') }}</td>
                             <td>{{ $category->updated_at->format('d/m/Y') }} ás
@@ -87,7 +89,7 @@
 
                                     <!-- Modal -->
                                     <form class="form-floating" method="post"
-                                        action="{{ route('categories.edit', $category->id) }}"
+                                        action="{{ route('categories.update', $category->id) }}"
                                         enctype="multipart/form-data">
                                         @method('PUT')
                                         @csrf
@@ -130,7 +132,7 @@
 
                                     <!-- Modal -->
                                     <form class="form-floating" method="post"
-                                        action="{{ route('categories.delete', $category->id) }}">
+                                        action="{{ route('categories.destroy', $category->id) }}">
                                         @method('DELETE')
                                         @csrf
                                         <div class="modal fade py-3" id="ModalConfirm{{ $category->id }}" tabindex="-1"

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,15 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::middleware('auth')->group(function () {
-    Route::get('cadastrar-produtos', [CategoriesController::class, 'products'])->name('products');
-    Route::post('cadastrar-produtos/create', [CategoriesController::class, 'productStore'])->name('products.create');
-    Route::put('cadastrar-produtos/{product}', [CategoriesController::class, 'productUpdate'])->name('products.edit');
-    Route::delete('cadastrar-produtos/{product}', [CategoriesController::class, 'productDestroy'])->name('products.delete');
+    Route::get('/cadastrar-categorias', [CategoriesController::class, 'index'])->name('categories');
+    Route::post('/cadastrar-categorias', [CategoriesController::class, 'store'])->name('categories.store');
+    Route::put('/cadastrar-categorias/{category}', [CategoriesController::class, 'update'])->name('categories.update');
+    Route::delete('/cadastrar-categorias/{category}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 
-    Route::get('cadastrar-categorias', [CategoriesController::class, 'categories'])->name('categories');
-    Route::post('cadastrar-categorias/create', [CategoriesController::class, 'categoryStore'])->name('categories.create');
-    Route::put('cadastrar-categorias/{category}', [CategoriesController::class, 'categoryUpdate'])->name('categories.edit');
-    Route::delete('cadastrar-categorias/{category}', [CategoriesController::class, 'categoryDestroy'])->name('categories.delete');
+    Route::get('/cadastrar-produtos', [ProductsController::class, 'index'])->name('products');
+    Route::post('/cadastrar-produtos', [ProductsController::class, 'store'])->name('products.store');
+    Route::put('/cadastrar-produtos/{product}', [ProductsController::class, 'update'])->name('products.update');
+    Route::delete('/cadastrar-produtos/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
-    Route::get('/', [CategoriesController::class, 'products'])->withoutMiddleware('auth')->name('dashboard');
+    Route::get('/', [CategoriesController::class, 'products'])->withoutMiddleware('auth')->name('dashboard')->withoutMiddleware('auth');
 //});
