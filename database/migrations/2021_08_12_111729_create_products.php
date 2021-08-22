@@ -26,6 +26,8 @@ class CreateProducts extends Migration
             $table->text('composition')->nullable();
             $table->enum('size', ['PP', 'P', 'M', 'G', 'GG', 'EG', 'EGG'])->nullable();
 
+            $table->string('file')->nullable();
+
             $table->timestamps();
         });
     }

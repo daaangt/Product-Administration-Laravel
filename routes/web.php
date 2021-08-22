@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::middleware('auth')->group(function () {
-    Route::get('/cadastrar-categorias', [CategoriesController::class, 'index'])->name('categories');
+    Route::get('/cadastrar-categorias', [CategoriesController::class, 'indexAdmin'])->name('categories');
     Route::post('/cadastrar-categorias', [CategoriesController::class, 'store'])->name('categories.store');
     Route::put('/cadastrar-categorias/{category}', [CategoriesController::class, 'update'])->name('categories.update');
     Route::delete('/cadastrar-categorias/{category}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
@@ -26,5 +27,8 @@ use Illuminate\Support\Facades\Route;
     Route::put('/cadastrar-produtos/{product}', [ProductsController::class, 'update'])->name('products.update');
     Route::delete('/cadastrar-produtos/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
-    Route::get('/', [CategoriesController::class, 'products'])->withoutMiddleware('auth')->name('dashboard')->withoutMiddleware('auth');
+    Route::get('/', [CategoriesController::class, 'index'])->withoutMiddleware('auth')->name('homepage');
+
+    Route::get('/categoria/{category}', [CategoriesController::class, 'show'])->withoutMiddleware('auth')->name('category');
+    Route::get('/produto/{product}', [ProductsController::class, 'show'])->withoutMiddleware('auth')->name('product');
 //});

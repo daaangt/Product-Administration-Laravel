@@ -3,20 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\Products;
 
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
     /**
-     * Display a listing of the categories and a form to additions.
+     * Display a list of the categories and a form to additions.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexAdmin()
     {
         $categories = Categories::all();
-        return view('dashboard.categories', compact('categories'));
+        return view('management.categories', compact('categories'));
+    }
+
+    /**
+     * Display a list of the categories
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index() {
+        $categories = Categories::all();
+        return view('index', compact('categories'));
+    }
+
+    /**
+     * Display a list of the products of a category
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Categories $category) {
+        $title = $category->name;
+        $products = Products::where('categories_id', $category->id)->orderBy('id')->get();
+
+        return view('products', compact('products', 'title'));
     }
 
     /**
@@ -59,8 +82,8 @@ class CategoriesController extends Controller
 
         if ($request->hasFile('file')) {
             if($request->file('file')->isValid()) {
-                if (file_exists(asset($category->file))) {
-                    unlink(asset($category->file));
+                if (file_exists(public_path($category->file))) {
+                    unlink(public_path($category->file));
                 }
 
                 $request->file('file')->move(public_path('categories\\'), $request->name . "." . $request->file('file')->getClientOriginalExtension());
@@ -80,8 +103,8 @@ class CategoriesController extends Controller
      */
     public function destroy(Categories $category)
     {
-        if (file_exists(asset($category->file))) {
-            unlink(asset($category->file));
+        if (file_exists(public_path($category->file))) {
+            unlink(public_path($category->file));
         }
 
         $category->delete();

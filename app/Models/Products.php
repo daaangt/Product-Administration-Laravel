@@ -22,6 +22,7 @@ class Products extends Model
         'categories_id',
         'price',
         'composition',
+        'file',
         'size'
     ];
 
@@ -31,7 +32,7 @@ class Products extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime:d/m/Y H:i:s',
+        'file' => 'array',
     ];
 
     public function categoryid()
