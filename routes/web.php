@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::middleware('auth')->group(function () {
+    Route::get('/login', [CategoriesController::class, 'index'])->name('login');
+
     Route::get('/cadastrar-categorias', [CategoriesController::class, 'indexAdmin'])->name('categories');
     Route::post('/cadastrar-categorias', [CategoriesController::class, 'store'])->name('categories.store');
     Route::put('/cadastrar-categorias/{category}', [CategoriesController::class, 'update'])->name('categories.update');
