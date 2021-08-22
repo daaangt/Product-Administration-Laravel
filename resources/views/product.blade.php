@@ -9,10 +9,10 @@ integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxV
     <div class="container-fluid">
         <div class="col-md-12 d-flex justify-content-center py-3">
             <div class="col-md-8">
-                <h3 class="text-center text-primary mt-3">{{ $product->categoryid->name . ' ' . $product->name }}</h3>
+                <h3 class="text-center text-primary">{{ $product->categoryid->name . ' ' . $product->name }}</h3>
 
                 <div class="col-md-6 mx-auto">
-                    <div id="carouselExampleIndicators" class="carousel slide mt-3 border" data-bs-ride="carousel">
+                    <div id="carouselExampleIndicators" class="carousel slide border" data-bs-ride="carousel">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                                 class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -25,17 +25,17 @@ integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxV
                             @if (isset($product->file))
                                 <div class="carousel-item active col-md-6 ">
                                     <img src="{{ asset($product->file[0]) }}" class="card-img-top border"
-                                        style="overflow: hidden;" width="500" height="500" style="object-fit: cover">
+                                        style="overflow: hidden;" width="600" height="600" style="object-fit: cover">
                                 </div>
 
                                 <div class="carousel-item">
                                     <img src="{{ asset($product->file[1]) }}" class="card-img-top border"
-                                        style="overflow: hidden;" width="500" height="500" style="object-fit: cover">
+                                        style="overflow: hidden;" width="600" height="600" style="object-fit: cover">
                                 </div>
 
                                 <div class="carousel-item">
                                     <img src="{{ asset($product->file[2]) }}" class="card-img-top border"
-                                        style="overflow: hidden;" width="500" height="500" style="object-fit: cover">
+                                        style="overflow: hidden;" width="600" height="600" style="object-fit: cover">
                                 </div>
                             @endif
                         </div>
