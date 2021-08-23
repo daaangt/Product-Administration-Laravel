@@ -8,26 +8,16 @@ PT: Este projeto consiste em gerenciar as categorias de um tipo de produto e os 
 
 ## Photos
 
-<details>
-<summary>Creating a category/Criando uma categoria:</summary>
+Creating a category/Criando uma categoria:
 <img src="https://user-images.githubusercontent.com/59860240/130374596-39590690-9a8b-4489-bb34-a845083c878c.png"></img>
-</details>
-<details>
-<summary>Creating a product/Criando um produto:</summary>
+Creating a product/Criando um produto:
 <img src="https://user-images.githubusercontent.com/59860240/130374474-1ca30908-21ca-4a2d-9e38-9d7c0576c004.png"></img>
-</details>
-<details>
-<summary>Showing the categories to the common user/Mostrando as categorias para o usuário comum:</summary>
+Showing the categories to the common user/Mostrando as categorias para o usuário comum:
 <img src="https://user-images.githubusercontent.com/59860240/130374496-0ecd4185-db68-496a-85c7-18d0b8871cfb.png"></img>
-</details>
-<details>
-<summary>Showing the products of a specific category to the common user/Mostrando os produtos de uma categoria específica para o usuário comum:</summary>
+Showing the products of a specific category to the common user/Mostrando os produtos de uma categoria específica para o usuário comum:
 <img src="https://user-images.githubusercontent.com/59860240/130375324-24747b60-8d43-4bf8-bb7b-b4916c65ad18.png"></img>
-</details>
-<details>
-<summary>Detailing the product for the common user with until 3 pics/Detalhando um produto para o usuário comum com até 3 fotos:</summary>
+Detailing the product for the common user with until 3 pics/Detalhando um produto para o usuário comum com até 3 fotos:
 <img src="https://user-images.githubusercontent.com/59860240/130374732-54fa47e5-fd8f-4735-ac49-6d9ba03a961d.png"></img>
-</details>
 
 ## Technologies
 
