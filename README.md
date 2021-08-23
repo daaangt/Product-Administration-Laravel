@@ -22,13 +22,12 @@ PT: Este projeto consiste em gerenciar as categorias de um tipo de produto e os 
 </details>
 <details>
 <summary>Showing the products of a specific category to the common user/Mostrando os produtos de uma categoria específica para o usuário comum:</summary>
-<img src="https://user-images.githubusercontent.com/59860240/130374669-108c0032-511d-4218-a802-30a7d3c8a26b.png"></img>
+<img src="https://user-images.githubusercontent.com/59860240/130375324-24747b60-8d43-4bf8-bb7b-b4916c65ad18.png"></img>
 </details>
 <details>
 <summary>Detailing the product for the common user with until 3 pics/Detalhando um produto para o usuário comum com até 3 fotos:</summary>
 <img src="https://user-images.githubusercontent.com/59860240/130374732-54fa47e5-fd8f-4735-ac49-6d9ba03a961d.png"></img>
 </details>
-
 
 ## Technologies
 
